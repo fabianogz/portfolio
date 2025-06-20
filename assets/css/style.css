@@ -1,0 +1,802 @@
+* {
+    box-sizing: border-box;
+}
+
+.noselect {
+    user-select: none;
+    -webkit-user-select: none; 
+    -moz-user-select: none;    
+    -ms-user-select: none;     
+}
+
+body {
+    margin: 0;
+    padding-top: 80px; 
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+/* PAGINA */   
+
+header nav a,
+header .contato-btn,
+header .logo {
+  font-family: 'Nexa Heavy', sans-serif;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 15px 30px;
+    min-height: 80px; 
+    background-color: #1f1f1f;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.logo img {
+    height: 80px;
+}
+.logo {
+    cursor: pointer;
+}
+
+nav {
+    display: flex;
+    gap: 50px; 
+}
+
+nav a {
+    position: relative;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: color 0.3s;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: #00adb5; 
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+nav a:hover {
+    color: #00adb5; 
+}
+
+.contato-btn {
+    background-color: #00adb5;
+    color: #121212;
+    padding: 10px 20px;
+    border-radius: 25px; 
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.contato-btn:hover {
+    background-color: #019ca3;
+    transform: scale(1.05);
+}
+
+/* header */
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+
+@font-face {
+    font-family: 'Agharti';
+    src: url('../fonts/Agharti-SemiBold.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Nougat';
+  src: url('../fonts/Nougat-ExtraBlack.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+#particles-js {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+
+.hero-content,
+.corner-text {
+    position: relative;
+    z-index: 1;
+}
+.hero {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 92vh;
+    background: linear-gradient(135deg, #1f1f1f, #121212);
+    padding: 0 20px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.hero-content {
+    max-width: 800px;
+}
+
+.code-line {
+    font-family: 'Fira Code', monospace;
+    color: #00ff88; 
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-family: 'Nougat', sans-serif;
+    color: white;
+    font-size: 4rem;
+    overflow: hidden;
+}
+
+.hero-content h1 {
+    font-size: 3em;
+    font-weight: bold;
+    color: #f5f5f5;
+    margin-bottom: 30px;
+}
+
+.hero-btn {
+    font-family: 'Nexa Heavy', sans-serif;
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #00adb5;
+    color: #121212;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.hero-btn:hover {
+    background-color: #019ca3;
+    transform: scale(1.05);
+}
+
+.corner-text {
+    position: absolute;
+    bottom: 0px;
+    left: 100px;
+    font-family: 'Agharti', sans-serif;
+    font-size: 10em;
+    color: #f5f5f5;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 0.9;
+    text-align: left;
+}
+
+.corner-text .amp {
+    font-size: 0.5em;
+    vertical-align: inline;
+}
+
+
+/* hero */
+
+.sobre-section h2 {
+  font-family: 'Nexa Light', sans-serif;
+  font-size: 1.3em;
+  color: #32dee7; 
+  margin-bottom: -20px; 
+}
+
+.sobre-section p {
+  font-family: 'Nexa Heavy', sans-serif;
+  font-size: 1.8em; 
+  color: white;
+  margin-bottom: 30px;
+}
+
+.sobre-section {
+  text-align: center;
+  padding: 30px 20px;
+  color: white;
+}
+
+.sobre-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+  .sobre-card {
+    background-color: #222;
+    border: 1px solid #444;
+    border-radius: 20px;
+    padding: 30px 20px;
+    width: 700px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .sobre-card .tecnologias-grid {
+    font-family: 'Nexa Light', sans-serif;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    width: 100%;
+    max-width: 700px;        
+    margin: 0 auto;           
+    justify-items: start;    
+    place-content: center;
+  }
+  .sobre-card .tecnologias-grid {
+    padding-right: 40px;
+  }
+
+
+.tecnologia-item {
+  border-radius: 12px;
+  padding: 10px 15px;
+  width: 100%;
+  max-width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  margin: 0 auto;
+}
+
+  .sobre-card .tecnologias-grid:empty {
+    display: none;
+  }
+
+  .sobre-card .tecnologias-grid {
+    place-content: center;  
+  }
+
+  .sobre-card h3 {
+    color: #ffffff;
+    font-family: 'Nexa Heavy', sans-serif;
+    font-size: 1.5em;
+    text-align: center;
+    margin-bottom: 10px;  
+    margin-top: -5px;
+  }
+
+  .tecnologia-titulo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffffff;
+    font-family: 'Nexa Heavy', sans-serif;
+    font-size: 1.3em;
+  }
+
+  .tecnologia-titulo svg {
+    stroke: #32dee7;
+    fill: #32dee7;
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px; 
+  }
+
+  .tecnologia-nivel {
+    font-family: 'Nexa Light', sans-serif;
+    color: #ffffff;
+    font-size: 1em;
+    margin-left: 50px;
+    text-align: left;
+  }
+
+.experiencia-section {
+  padding: 10px 20px 100px;
+  color: white;
+  text-align: center;
+}
+
+.experiencia-card {
+  background-color: #222;
+  border: 1px solid #444;
+  border-radius: 15px;
+  margin: 15px auto;
+  max-width: 700px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.experiencia-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  cursor: pointer;
+  font-family: 'Nexa Heavy', sans-serif;
+  font-size: 1.2em;
+  color: #ffffff;
+}
+
+.experiencia-header:hover {
+  background-color: #2a2a2a;
+}
+
+.experiencia-header svg {
+  transition: transform 0.3s ease;
+  margin: 0;               
+  vertical-align: middle;  
+  height: 24px;
+  width: 24px;
+}
+
+
+.experiencia-card.active .chevron-icon {
+  transform: rotate(180deg);
+}
+
+.experiencia-descricao {
+  padding: 0 20px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+}
+
+.experiencia-card.active .experiencia-descricao {
+  padding: 15px 20px;
+  max-height: 300px;
+}
+
+
+.experiencia-descricao p {
+  margin: 0;
+  font-family: 'Nexa Light', sans-serif;
+  text-align: left;
+}
+
+.experiencia-data {
+  font-family: 'Nexa Light', sans-serif; 
+  font-size: 0.9em;                     
+  color: #cccccc;                       
+  margin-left: 10px;                
+  margin-bottom: 10px;                
+}
+
+/*SOBRE */
+@font-face {
+  font-family: 'Nexa Heavy';
+  src: url('../fonts/Nexa-Heavy.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Nexa Light';
+  src: url('../fonts/Nexa-ExtraLight.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.contato-section {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: #3a3a3a; 
+}
+
+.contato-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto;
+  gap: 40px;
+}
+
+.contato-form-container {
+  flex: 1;
+  margin-left: 110px;
+}
+
+.contato-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.contato-item {
+  font-family: 'Nexa Heavy', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  color: white;
+  text-decoration: none;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.contato-item svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.contato-item span {
+  line-height: 1;
+}
+
+.contato-item:hover span {
+  text-decoration: underline;
+}
+
+.contato-item.instagram svg {
+  width: 30px;
+  height: 32px;
+}
+
+.contato-section h2 {
+  font-family: 'Nexa Light', sans-serif;
+  font-size: 1.3em;
+  color: #32dee7; 
+  margin-bottom: -20px; 
+
+}
+
+.contato-section p {
+  font-family: 'Nexa Heavy', sans-serif;
+  font-size: 1.8em; 
+  color: white;
+  margin-bottom: 30px;
+}
+
+.contato-form {
+  font-family: 'Nexa Light', sans-serif;
+  font-weight: bold;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contato-form input,
+.contato-form textarea {
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+  width: 100%;
+}
+
+.contato-form input:focus,
+.contato-form textarea:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.contato-form button {
+  font-family: 'Nexa Light', sans-serif;
+  font-weight: bold;
+  width: auto;    
+  padding: 20px 40px;
+  background-color: #00adb5;
+  color: white;
+  border: none;
+  border-radius: 50px;    
+  font-size: 1.3em;
+  cursor: pointer;
+  align-self: flex-start;     
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.contato-form button:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px);
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.form-group input,
+.form-group textarea {
+  background-color: #555;
+  color: white;
+  border: 1px solid #777;
+  padding: 14px 12px;
+  border-radius: 8px;
+  font-size: 1em;
+  width: 100%;
+  resize: none;
+  overflow: hidden;
+  
+}
+
+.form-group input.invalid,
+.form-group textarea.invalid {
+  border-color: #ff4d4d;
+}
+
+.form-group label {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  color: #aaa;
+  font-size: 1em;
+  pointer-events: none;
+  transition: all 0.2s ease;
+  padding: 0 4px;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: transparent;
+}
+
+.form-group input:focus + label,
+.form-group textarea:focus + label,
+.form-group input:not(:placeholder-shown) + label,
+.form-group textarea:not(:placeholder-shown) + label {
+  top: 1px;
+  left: 10px;
+  font-size: 0.8em;
+  color: #ffffff;
+  background-color: #555;
+  padding: 0 4px;
+  border-radius: 5px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #00adb5;
+}
+
+.form-group textarea {
+  min-height: 120px;
+  font-family: sans-serif;
+}
+
+.form-group label[for="mensagem"] {
+  top: 12px;
+  left: 12px;
+  transform: none;
+  font-size: 0.9em;
+  color: #aaa;
+}
+
+.form-group textarea:focus + label,
+.form-group textarea:not(:placeholder-shown) + label {
+  top: -8px;
+  left: 10px;
+  font-size: 0.8em;
+  color: #ffffff;
+  background-color: #555;
+  padding: 0 4px;
+  border-radius: 5px;
+}
+
+/* contato */
+footer {
+    text-align: center;
+    padding: 50px 0px 20px;
+    background-color: #1f1f1f;
+    color: #ffffff;
+}
+
+.footer-logo img {
+    height: 100px;
+    margin-bottom: 20px;
+    margin-left: -35px;
+}
+
+.footer-nav {
+  
+    margin-bottom: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.footer-nav a {
+  font-family: 'Nexa Heavy', sans-serif;
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 8px;
+    transition: color 0.3s;
+}
+
+.footer-nav a:hover {
+    color: #00adb5;
+}
+
+.footer-nav .divider {
+    color: #888888;
+    margin: 0 5px;
+}
+
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+    margin-bottom: 10px; 
+    position: relative;
+    z-index: 0;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: #ffffff; 
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    transition: background-color 0.3s, transform 0.3s;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative; 
+    z-index: 1;
+}
+
+.social-btn svg {
+    width: 24px;
+    height: 24px;
+    transition: fill 0.3s ease, filter 0.3s ease;
+}
+
+.social-btn.github svg {
+    width: 32px;
+    height: 32px;
+}
+
+.social-btn.instagram {
+  background: white; 
+  transition: background 0.3s, transform 0.3s;
+}
+
+.social-btn.instagram svg path {
+  fill: url(#instagramGradient);
+  transition: fill 0.3s;
+}
+
+.social-btn.instagram:hover {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  transform: translateY(-8px);
+  z-index: 10;
+}
+
+.social-btn.instagram:hover svg path {
+  fill: white; 
+}
+
+.social-btn.whatsapp:hover {
+    background-color: #25D366;
+    transform: translateY(-8px);
+    z-index: 10;
+}
+
+.social-btn.whatsapp svg path {
+    fill: #25D366;
+}
+
+.social-btn.whatsapp:hover svg path {
+    fill: #ffffff;
+}
+
+.social-btn.github:hover {
+    background-color: #6e6e6e;
+    transform: translateY(-8px);
+    z-index: 10;
+}
+
+.social-btn.github svg path {
+    fill: #000000;
+}
+
+.social-btn.github:hover svg path {
+    fill: #ffffff;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #555555;
+    margin: 20px 0;
+    max-width: 100%;
+}
+
+footer p {
+    font-size: 0.9em;
+    color: #aaaaaa;
+}
+
+
+/* footer */
+
+#scrollTopBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #4F4F4F;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+
+#scrollTopBtn svg {
+  color: white;
+}
+
+#scrollTopBtn.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+#scrollTopBtn:hover {
+  transform: translateY(-5px);
+}
+
+#sobre {
+  scroll-margin-top: 100px; 
+}
+
+#sobre {
+  scroll-margin-top: 100px; 
+}
+
+#contato {
+  scroll-margin-top: 90px; 
+}
