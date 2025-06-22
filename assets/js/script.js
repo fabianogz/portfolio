@@ -98,6 +98,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 /* */
 
+(function() {
+  emailjs.init('ilu6laOwYyJuNyGBC');
+})();
+
 document.addEventListener('DOMContentLoaded', function() {
   const nomeInput = document.getElementById('nome');
   const emailInput = document.getElementById('email');
@@ -176,29 +180,58 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (formatted !== value) {
       telefoneInput.value = formatted;
-
       let newCursor = cursor;
 
       if (cursor > oldCursor && formatted.length > oldValue.length) {
         newCursor = cursor + (formatted.length - oldValue.length);
-      } else if (cursor < oldCursor && formatted.length < oldValue.length) {
-        newCursor = cursor;
-      } else {
-        newCursor = cursor;
       }
-
       newCursor = Math.min(newCursor, formatted.length);
       telefoneInput.setSelectionRange(newCursor, newCursor);
     }
 
     oldValue = telefoneInput.value;
     oldCursor = telefoneInput.selectionStart;
-
-    validarTelefone(); 
+    validarTelefone();
   });
 
+  // ------ Função de Notificação --------
+  function showNotification(message, isError = false) {
+    let notification = document.querySelector('.notification');
+
+    if (!notification) {
+      notification = document.createElement('div');
+      notification.classList.add('notification', isError ? 'error' : 'success');
+
+      notification.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
+            stroke-linecap="round" stroke-linejoin="round" 
+            class="lucide lucide-mail-check-icon lucide-mail-check">
+          <path d="M22 13V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h8"/>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          <path d="m16 19 2 2 4-4"/>
+        </svg>
+        <span></span>
+      `;
+      document.body.appendChild(notification);
+    }
+
+    notification.querySelector('span').textContent = message;
+
+    notification.style.display = 'flex';
+    notification.style.animation = 'slideInUp 0.5s ease forwards';
+
+    setTimeout(() => {
+      notification.style.animation = 'slideOutDown 0.5s ease forwards';
+      notification.addEventListener('animationend', () => {
+        notification.style.display = 'none';
+      }, { once: true });
+    }, 10000);
+  }
 
   form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
     validarNome();
     validarEmail();
     validarTelefone();
@@ -206,9 +239,25 @@ document.addEventListener('DOMContentLoaded', function() {
     if (nomeInput.classList.contains('invalid') ||
         emailInput.classList.contains('invalid') ||
         telefoneInput.classList.contains('invalid')) {
-      e.preventDefault(); 
+      return;
     }
+
+    showNotification('Sua mensagem foi enviada!');
+
+    emailjs.sendForm('service_ar6rvdq', 'FG1545237187123571237153', form)
+      .then(() => {
+        return emailjs.sendForm('service_ar6rvdq', 'FG6215331124563472135612', form);
+      })
+      .then(() => {
+        form.reset();
+        autoResizeTextarea(mensagemTextarea);
+      })
+      .catch(error => {
+        showNotification('Erro ao enviar: ' + error.text, true);
+      });
   });
+
+
 });
 
   function copiarTelefone() {
@@ -242,8 +291,8 @@ document.addEventListener('DOMContentLoaded', function() {
     card.classList.toggle('active');
   }
   
-/* TEST */
-function filtrarPortfolio(filtro) {
+
+  function filtrarPortfolio(filtro) {
   const items = document.querySelectorAll('.portfolio-item');
   const opcoes = document.querySelectorAll('.filtro-opcao');
 
@@ -303,7 +352,7 @@ function iniciarDoom() {
   hero.innerHTML = ''; 
 
   const iframe = document.createElement('iframe');
-  iframe.src = 'https://js-dos.com/games/doom.exe.html'; 
+  iframe.src = 'https://js-dos.com/games/doom.html'; 
   iframe.style.width = '100%';
   iframe.style.height = '100vh';
   iframe.style.border = 'none';
