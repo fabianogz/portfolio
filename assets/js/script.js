@@ -1,0 +1,312 @@
+    document.getElementById('logo').addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    document.addEventListener('mousemove', function(e) {
+    const bg = document.querySelector('.interactive-bg');
+    const x = (e.clientX / window.innerWidth - 0.5) * 30;
+    const y = (e.clientY / window.innerHeight - 0.5) * 30;
+    bg.style.transform = `translate(${x}px, ${y}px)`;
+});
+
+particlesJS.load('particles-js', 'assets/js/particles-config.json', function() {
+
+  const pJS = window.pJSDom[0].pJS;
+  const defaultSpeed = pJS.particles.move.speed;
+  let particlesMoving = true;
+
+  const heroElement = document.querySelector('.hero');
+  const cornerText = document.querySelector('.corner-text');
+
+  heroElement.addEventListener('click', function() {
+    if (particlesMoving) {
+      pJS.particles.move.speed = 0;
+    } else {
+      pJS.particles.move.speed = defaultSpeed;
+    }
+    particlesMoving = !particlesMoving;
+  });
+
+  heroElement.addEventListener('mouseenter', function() {
+    pJS.interactivity.status = 'mousemove';
+  });
+
+  heroElement.addEventListener('mouseleave', function() {
+    pJS.interactivity.mouse.pos_x = null;
+    pJS.interactivity.mouse.pos_y = null;
+    pJS.interactivity.status = 'mouseleave';
+  });
+
+  function updateFakeMousePosition() {
+    if (!cornerText) return;
+
+    const rect = cornerText.getBoundingClientRect();
+
+    const posX = rect.left + rect.width / 2;
+    const posY = rect.top + rect.height / 2;
+
+    pJS.interactivity.mouse.pos_x = posX;
+    pJS.interactivity.mouse.pos_y = posY;
+
+    pJS.interactivity.status = 'mousemove';
+  }
+
+  function animate() {
+    updateFakeMousePosition();
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+});
+
+function isOverlapping(el1, el2) {
+    const rect1 = el1.getBoundingClientRect();
+    const rect2 = el2.getBoundingClientRect();
+
+    return !(rect1.right < rect2.left || 
+             rect1.left > rect2.right || 
+             rect1.bottom < rect2.top || 
+             rect1.top > rect2.bottom);
+}
+
+function checkOverlapAndSetOpacity() {
+    const elementoA = document.querySelector('.hero-content');
+    const elementoB = document.querySelector('.corner-text');
+
+    if (isOverlapping(elementoA, elementoB)) {
+        elementoB.style.opacity = '0.3';
+    } else {
+        elementoB.style.opacity = '1';
+    }
+}
+
+window.addEventListener('resize', checkOverlapAndSetOpacity);
+
+window.addEventListener('load', checkOverlapAndSetOpacity);
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('textarea').forEach(function(textarea) {
+    textarea.addEventListener('input', function() {
+      this.style.height = 'auto';
+      this.style.height = (this.scrollHeight) + 'px';
+    });
+  });
+});
+/* */
+
+document.addEventListener('DOMContentLoaded', function() {
+  const nomeInput = document.getElementById('nome');
+  const emailInput = document.getElementById('email');
+  const telefoneInput = document.getElementById('telefone');
+  const mensagemTextarea = document.getElementById('mensagem');
+  const form = document.getElementById('contato-form');
+
+  function validarNome() {
+    const nome = nomeInput.value.trim();
+    if (nome.length >= 3 || nome.length === 0) {
+      nomeInput.classList.remove('invalid');
+    } else {
+      nomeInput.classList.add('invalid');
+    }
+  }
+
+  function validarEmail() {
+    const email = emailInput.value.trim();
+    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (regexEmail.test(email) || email.length === 0) {
+      emailInput.classList.remove('invalid');
+    } else {
+      emailInput.classList.add('invalid');
+    }
+  }
+
+  function validarTelefone() {
+    const telefone = telefoneInput.value.trim();
+    const regexFormatado = /^\(\d{2}\)\s(\d\s)?\d{4}-\d{4}$/;
+    const regexLimpo = /^\d{10,11}$/;
+
+    if (telefone.length === 0) {
+      telefoneInput.classList.remove('invalid');
+      return;
+    }
+
+    if (regexFormatado.test(telefone) || regexLimpo.test(telefone)) {
+      telefoneInput.classList.remove('invalid');
+    } else {
+      telefoneInput.classList.add('invalid');
+    }
+  }
+
+  function autoResizeTextarea(textarea) {
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+  }
+
+  nomeInput.addEventListener('input', validarNome);
+  emailInput.addEventListener('input', validarEmail);
+  telefoneInput.addEventListener('input', validarTelefone);
+  mensagemTextarea.addEventListener('input', function() {
+    autoResizeTextarea(mensagemTextarea);
+  });
+
+  let oldValue = '';
+  let oldCursor = 0;
+
+  telefoneInput.addEventListener('input', function(e) {
+    let value = telefoneInput.value;
+    let cursor = telefoneInput.selectionStart;
+
+    let cleaned = value.replace(/\D/g, '').slice(0, 11);
+    let formatted = '';
+
+    if (cleaned.length > 0) {
+      formatted += '(' + cleaned.slice(0, 2) + ') ';
+    }
+    if (cleaned.length > 2) {
+      if (cleaned.length > 6) {
+        formatted += cleaned.slice(2, 3) + ' ' + cleaned.slice(3, 7) + '-' + cleaned.slice(7);
+      } else {
+        formatted += cleaned.slice(2);
+      }
+    }
+
+    if (formatted !== value) {
+      telefoneInput.value = formatted;
+
+      let newCursor = cursor;
+
+      if (cursor > oldCursor && formatted.length > oldValue.length) {
+        newCursor = cursor + (formatted.length - oldValue.length);
+      } else if (cursor < oldCursor && formatted.length < oldValue.length) {
+        newCursor = cursor;
+      } else {
+        newCursor = cursor;
+      }
+
+      newCursor = Math.min(newCursor, formatted.length);
+      telefoneInput.setSelectionRange(newCursor, newCursor);
+    }
+
+    oldValue = telefoneInput.value;
+    oldCursor = telefoneInput.selectionStart;
+
+    validarTelefone(); 
+  });
+
+
+  form.addEventListener('submit', function(e) {
+    validarNome();
+    validarEmail();
+    validarTelefone();
+
+    if (nomeInput.classList.contains('invalid') ||
+        emailInput.classList.contains('invalid') ||
+        telefoneInput.classList.contains('invalid')) {
+      e.preventDefault(); 
+    }
+  });
+});
+
+  function copiarTelefone() {
+    const telefone = "(61) 99453-7365";
+    navigator.clipboard.writeText(telefone).then(() => {
+    });
+  }
+
+  const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+  window.addEventListener('scroll', () => {
+    const hero = document.querySelector('.hero');
+    const triggerPoint = hero.offsetHeight * 0.5;
+
+    if (window.scrollY > triggerPoint) {
+      scrollTopBtn.classList.add('show');
+    } else {
+      scrollTopBtn.classList.remove('show');
+    }
+  });
+
+  scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+  
+  function toggleDescricao(header) {
+    const card = header.parentElement;
+    card.classList.toggle('active');
+  }
+  
+/* TEST */
+function filtrarPortfolio(filtro) {
+  const items = document.querySelectorAll('.portfolio-item');
+  const opcoes = document.querySelectorAll('.filtro-opcao');
+
+  opcoes.forEach(op => op.classList.remove('ativo'));
+
+  if (filtro === 'todos') {
+    items.forEach(item => item.style.display = 'block');
+  }
+
+  if (filtro === 'data') {
+    items.forEach(item => {
+      const data = item.getAttribute('data-data');
+      if (parseInt(data) >= 2024) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  }
+
+  if (filtro === 'devweb') {
+    items.forEach(item => {
+      if (item.classList.contains('devweb')) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  }
+
+  document.querySelector(`.filtro-opcao[onclick*="${filtro}"]`).classList.add('ativo');
+}
+
+
+// Sequência correta
+const secretSequence = ['servicos', 'servicos', 'sobre', 'portfolio', 'servicos'];
+let userSequence = [];
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', function(e) {
+    const targetId = this.getAttribute('href').replace('#', '');
+
+    userSequence.push(targetId);
+
+    if (userSequence.length > secretSequence.length) {
+      userSequence.shift();
+    }
+
+    if (userSequence.join(',') === secretSequence.join(',')) {
+      iniciarDoom();
+    }
+  });
+});
+
+function iniciarDoom() {
+  const hero = document.querySelector('.hero');
+  hero.innerHTML = ''; 
+
+  const iframe = document.createElement('iframe');
+  iframe.src = 'https://js-dos.com/games/doom.exe.html'; 
+  iframe.style.width = '100%';
+  iframe.style.height = '100vh';
+  iframe.style.border = 'none';
+
+  hero.appendChild(iframe);
+}
