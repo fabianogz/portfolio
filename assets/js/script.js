@@ -5,12 +5,6 @@
         });
     });
 
-    document.addEventListener('mousemove', function(e) {
-    const bg = document.querySelector('.interactive-bg');
-    const x = (e.clientX / window.innerWidth - 0.5) * 30;
-    const y = (e.clientY / window.innerHeight - 0.5) * 30;
-    bg.style.transform = `translate(${x}px, ${y}px)`;
-});
 
 particlesJS.load('particles-js', 'assets/js/particles-config.json', function() {
 
@@ -21,14 +15,23 @@ particlesJS.load('particles-js', 'assets/js/particles-config.json', function() {
   const heroElement = document.querySelector('.hero');
   const cornerText = document.querySelector('.corner-text');
 
-  heroElement.addEventListener('click', function() {
-    if (particlesMoving) {
-      pJS.particles.move.speed = 0;
-    } else {
-      pJS.particles.move.speed = defaultSpeed;
-    }
-    particlesMoving = !particlesMoving;
-  });
+  const isMobile = window.innerWidth <= 768;
+
+  if (!isMobile) {
+    heroElement.addEventListener('click', function() {
+      if (particlesMoving) {
+        pJS.particles.move.speed = 0;
+      } else {
+        pJS.particles.move.speed = defaultSpeed;
+      }
+      particlesMoving = !particlesMoving;
+    });
+  } else {
+    pJS.interactivity.events.onclick.enable = false;
+    pJS.interactivity.events.onclick.mode = [];  
+    pJS.interactivity.status = 'mouseleave';
+    pJS.particles.move.speed = defaultSpeed;
+  }
 
   heroElement.addEventListener('mouseenter', function() {
     pJS.interactivity.status = 'mousemove';
@@ -39,28 +42,9 @@ particlesJS.load('particles-js', 'assets/js/particles-config.json', function() {
     pJS.interactivity.mouse.pos_y = null;
     pJS.interactivity.status = 'mouseleave';
   });
-
-  function updateFakeMousePosition() {
-    if (!cornerText) return;
-
-    const rect = cornerText.getBoundingClientRect();
-
-    const posX = rect.left + rect.width / 2;
-    const posY = rect.top + rect.height / 2;
-
-    pJS.interactivity.mouse.pos_x = posX;
-    pJS.interactivity.mouse.pos_y = posY;
-
-    pJS.interactivity.status = 'mousemove';
-  }
-
-  function animate() {
-    updateFakeMousePosition();
-    requestAnimationFrame(animate);
-  }
-
-  animate();
 });
+
+//  PARTICULAS
 
 function isOverlapping(el1, el2) {
     const rect1 = el1.getBoundingClientRect();
@@ -96,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
-/* */
+// OPACIDADE NO TEXTO
 
 (function() {
   emailjs.init('ilu6laOwYyJuNyGBC');
@@ -108,6 +92,13 @@ document.addEventListener('DOMContentLoaded', function() {
   const telefoneInput = document.getElementById('telefone');
   const mensagemTextarea = document.getElementById('mensagem');
   const form = document.getElementById('contato-form');
+
+function piscarCampo(element) {
+  element.classList.add('invalid');
+  setTimeout(() => {
+    element.classList.remove('invalid');
+  }, 3000);
+  }
 
   function validarNome() {
     const nome = nomeInput.value.trim();
@@ -194,7 +185,6 @@ document.addEventListener('DOMContentLoaded', function() {
     validarTelefone();
   });
 
-  // ------ Função de Notificação --------
   function showNotification(message, isError = false) {
     let notification = document.querySelector('.notification');
 
@@ -290,7 +280,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const card = header.parentElement;
     card.classList.toggle('active');
   }
-  
+  // CONTATOS
 
   function filtrarPortfolio(filtro) {
   const items = document.querySelectorAll('.portfolio-item');
@@ -325,7 +315,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   document.querySelector(`.filtro-opcao[onclick*="${filtro}"]`).classList.add('ativo');
 }
-
+// FILTRO
 
 // Sequência correta
 const secretSequence = ['servicos', 'servicos', 'sobre', 'portfolio', 'servicos'];
@@ -352,10 +342,19 @@ function iniciarDoom() {
   hero.innerHTML = ''; 
 
   const iframe = document.createElement('iframe');
-  iframe.src = 'https://js-dos.com/games/doom.html'; 
+  iframe.src = 'https://js-dos.com/games/doom.exe.html'; 
   iframe.style.width = '100%';
   iframe.style.height = '100vh';
   iframe.style.border = 'none';
 
   hero.appendChild(iframe);
+}
+
+// HEADER
+function toggleMenu() {
+  const nav = document.querySelector('nav');
+  const toggle = document.querySelector('.menu-toggle');
+
+  nav.classList.toggle('show');
+  toggle.classList.toggle('active');
 }
