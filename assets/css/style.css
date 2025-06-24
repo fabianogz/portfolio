@@ -1335,40 +1335,58 @@ nav .contato-btn {
   .hero {
       height: 86vh;
   }
-
+/* TESTE  */
   .portfolio-filtros {
-    text-align: center;
     margin: 20px 10px;
     font-size: 0.9em;
+    color: transparent;
+    position: relative;
+    text-align: left;  
   }
 
-  .filtro-titulo {
-  margin-bottom: 5px;
-  font-weight: bold;
-}
+  .portfolio-filtros::before {
+    content: "Filtrar por:";
+    display: block;
+    font-weight: bold;
+    margin-bottom: 1px;
+    color: rgb(165, 165, 165);
+    text-align: center;        
+    width: 100%;              
+    position: relative;      
+  }
 
-.filtro-opcoes {
-  display: flex;
-  flex-wrap: nowrap;      
-  overflow-x: visible;     
-  gap: 3px;
-  justify-content: center;
-  margin-right: 20px;
-  white-space: nowrap;    
-  max-width: 100%;
-  font-size: 0.9em;
-}
+  .portfolio-filtros span {
+    display: inline-block;
+    white-space: nowrap;
+    color: rgb(165, 165, 165);
+    position: relative;
+  }
+
+  .filtro-opcoes {
+    position: relative;
+    top: -10px;
+    left: -10px; 
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    gap: 5px;
+  }
 
 
-.filtro-separador {
-  margin-left: 0px;  
-  margin-right: 3px; 
-  display: inline-block;
-  color: rgb(165, 165, 165);
-}
-.filtro-opcoes::-webkit-scrollbar {
-  display: none;
-} 
+  .filtro-opcao,
+  .filtro-separador {
+    white-space: nowrap;
+  }
+
+  .filtro-separador {
+    margin-right: 3px; 
+  }
+
+  .filtro-primeiro {
+    margin-left: 0;
+  }
 
   /* CONTATO */
   .contato-wrapper {
