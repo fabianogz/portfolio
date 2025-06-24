@@ -13,7 +13,6 @@ particlesJS.load('particles-js', 'assets/js/particles-config.json', function() {
   let particlesMoving = true;
 
   const heroElement = document.querySelector('.hero');
-  const cornerText = document.querySelector('.corner-text');
 
   const isMobile = window.innerWidth <= 768;
 
@@ -47,25 +46,36 @@ particlesJS.load('particles-js', 'assets/js/particles-config.json', function() {
 //  PARTICULAS
 
 function isOverlapping(el1, el2) {
-    const rect1 = el1.getBoundingClientRect();
-    const rect2 = el2.getBoundingClientRect();
+  if (!el1 || !el2) return false;
 
-    return !(rect1.right < rect2.left || 
-             rect1.left > rect2.right || 
-             rect1.bottom < rect2.top || 
-             rect1.top > rect2.bottom);
+  const rect1 = el1.getBoundingClientRect();
+  const rect2 = el2.getBoundingClientRect();
+
+  if (rect1.width === 0 || rect1.height === 0 || rect2.width === 0 || rect2.height === 0) {
+    return false;
+  }
+
+  const threshold = 1;
+
+  return !(
+    rect1.right <= rect2.left + threshold ||
+    rect1.left >= rect2.right - threshold ||
+    rect1.bottom <= rect2.top + threshold ||
+    rect1.top >= rect2.bottom - threshold
+  );
 }
 
 function checkOverlapAndSetOpacity() {
-    const elementoA = document.querySelector('.hero-content');
-    const elementoB = document.querySelector('.corner-text');
+  const elementoA = document.querySelector('.hero-content');
+  const elementoB = document.querySelector('.corner-text');
 
-    if (isOverlapping(elementoA, elementoB)) {
-        elementoB.style.opacity = '0.3';
-    } else {
-        elementoB.style.opacity = '1';
-    }
+  if (isOverlapping(elementoA, elementoB)) {
+    elementoB.style.opacity = '0.3';
+  } else {
+    elementoB.style.opacity = '1';
+  }
 }
+
 
 window.addEventListener('resize', checkOverlapAndSetOpacity);
 
@@ -80,7 +90,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
-// OPACIDADE NO TEXTO
 
 (function() {
   emailjs.init('ilu6laOwYyJuNyGBC');
