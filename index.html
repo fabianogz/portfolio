@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FG DEVS - Portfólio</title>
     <link rel="stylesheet" href="assets/css/style.css">
-    
+    <link rel="icon" type="image/png" href="assets/img/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="assets/img/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="assets/img/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="FG Devs" />
+    <link rel="manifest" href="assets/img/favicon/site.webmanifest" />
+
 </head>
 <body>
 <header>
@@ -48,10 +54,12 @@
   <p>Veja alguns dos projetos que desenvolvi ao longo da minha carreira.</p>
 
     <div class="portfolio-filtros">
-  Filtrar por
+    <div class="filtro-titulo">Filtrar por</div>
+    <div class="filtro-opcoes">
     <span class="filtro-opcao filtro-primeiro ativo" onclick="filtrarPortfolio('todos')">Todos</span><span class="filtro-separador">/</span>
     <span class="filtro-opcao" onclick="filtrarPortfolio('data')">Data de Postagem</span><span class="filtro-separador">/</span>
     <span class="filtro-opcao" onclick="filtrarPortfolio('devweb')">Desenvolvimento Web</span>
+    </div>
     </div>
   </div>
 
@@ -282,11 +290,11 @@
     <span>fabianognovais@gmail.com</span>
   </a>
 
-    <div onclick="copiarTelefone()" class="contato-item">
+    <div onclick="copiarTelefone(this)" class="contato-item">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/>
     </svg>
-    <span>(61) 99453-7365</span>
+    <span class="telefone-span">(61) 99453-7365</span>
     </div>
 
     <a href="https://instagram.com/fabianogz" target="_blank" class="contato-item instagram">
@@ -332,8 +340,6 @@
 
 
 </div>
-
-
 </section>
 
 <footer>

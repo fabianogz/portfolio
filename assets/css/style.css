@@ -751,6 +751,7 @@ h1 {
   margin-bottom: 30px;
 }
 
+
 .contato-form {
   font-family: 'Nexa Light', sans-serif;
   font-weight: bold;
@@ -818,6 +819,13 @@ h1 {
 .form-group input.invalid,
 .form-group textarea.invalid {
   border-color: #ff4d4d;
+}
+
+.form-group input:-webkit-autofill,
+.form-group textarea:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px #555 inset !important;
+  -webkit-text-fill-color: white !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 .form-group label {
@@ -921,15 +929,20 @@ h1 {
   }
 }
 
-@keyframes piscar {
-  0%, 100% { border-color: #ff4d4d; }
-  50% { border-color: transparent; }
+@keyframes piscarAnim {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
-.form-group input.invalid,
-.form-group textarea.invalid {
-  border-color: #ff4d4d;
-  animation: piscar 0.5s infinite;
+.piscar {
+  animation: piscarAnim 2s ease-in-out 1;
+}
+
+.telefone-span {
+  transition: opacity 0.4s ease;
+  opacity: 1;
 }
 
 /* contato */
@@ -1071,10 +1084,10 @@ footer p {
 
 /* footer */
 .hero iframe {
-  transform: scale(1.9);             /* Aumenta o iframe 1.5x */
-  transform-origin: top left;        /* Ponto fixo do zoom: canto superior esquerdo */
-  width: calc(100% / 2);           /* Ajusta a largura para compensar o zoom */
-  height: calc(100% / 2);          /* Ajusta a altura para compensar o zoom */
+  transform: scale(1.9);          
+  transform-origin: top left;      
+  width: calc(100% / 2);           
+  height: calc(100% / 2);         
 }
 
 .overlay-msg {
@@ -1082,9 +1095,9 @@ footer p {
   top: 0;
   left: 0;
   width: 100%;
-  height: 60px; /* altura do aviso */
-  background-color: black; /* ou qualquer cor */
-  pointer-events: none; /* deixa clicks passarem */
+  height: 60px; 
+  background-color: black; 
+  pointer-events: none;
   z-index: 9999;
 }
 
@@ -1310,7 +1323,7 @@ nav .contato-btn {
     top: 75%;
     left: 10px;
     bottom: auto;
-    font-size: 5em; /* Reduz bem o tamanho */
+    font-size: 5em;
     line-height: 1.2;
     text-align: left;
   }
@@ -1321,6 +1334,68 @@ nav .contato-btn {
   }
   .hero {
       height: 86vh;
+  }
+
+  .portfolio-filtros {
+    text-align: center;
+    margin: 20px 10px;
+    font-size: 0.9em;
+  }
+
+  .filtro-titulo {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.filtro-opcoes {
+  display: flex;
+  flex-wrap: nowrap;      
+  overflow-x: visible;     
+  gap: 3px;
+  justify-content: center;
+  margin-right: 20px;
+  white-space: nowrap;    
+  max-width: 100%;
+  font-size: 0.9em;
+}
+
+
+.filtro-separador {
+  margin-left: 0px;  
+  margin-right: 3px; 
+  display: inline-block;
+  color: rgb(165, 165, 165);
+}
+.filtro-opcoes::-webkit-scrollbar {
+  display: none;
+} 
+
+  /* CONTATO */
+  .contato-wrapper {
+    flex-direction: column;
+    align-items: center; 
+    gap: 20px; 
+  }
+
+  .contato-form-container {
+    margin-left: 0; 
+    width: 100%; 
+    padding: 0 15px; 
+  }
+
+  .contato-info {
+    text-align: center;
+  }
+
+  .contato-item {
+    justify-content: center; 
+  }
+
+  .contato-section p {
+    font-size: 1.5em; 
+  }
+  .contato-form button {
+    align-self: center;
   }
   body {
     padding-top: 130px;

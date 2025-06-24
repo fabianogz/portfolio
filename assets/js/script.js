@@ -216,7 +216,7 @@ function piscarCampo(element) {
       notification.addEventListener('animationend', () => {
         notification.style.display = 'none';
       }, { once: true });
-    }, 10000);
+    }, 5000);
   }
 
   form.addEventListener('submit', function(e) {
@@ -250,11 +250,33 @@ function piscarCampo(element) {
 
 });
 
-  function copiarTelefone() {
-    const telefone = "(61) 99453-7365";
-    navigator.clipboard.writeText(telefone).then(() => {
-    });
-  }
+let copiandoTelefone = false;
+
+function copiarTelefone(element) {
+  if (copiandoTelefone) return;
+
+  copiandoTelefone = true;
+
+  const telefone = "(61) 99453-7365";
+  const telefoneSpan = element.querySelector('span');
+  const textoOriginal = telefoneSpan.textContent;
+
+  telefoneSpan.classList.remove('telefone-fade-in');
+  telefoneSpan.textContent = "* COPIADO *";
+  telefoneSpan.classList.add('piscar');
+
+  setTimeout(() => {
+    telefoneSpan.classList.remove('piscar');
+    telefoneSpan.textContent = textoOriginal;
+    telefoneSpan.style.opacity = 0;
+
+    setTimeout(() => {
+      telefoneSpan.style.opacity = 1;
+      copiandoTelefone = false;
+    }, 50);  
+  }, 2000);
+}
+
 
   const scrollTopBtn = document.getElementById('scrollTopBtn');
 
