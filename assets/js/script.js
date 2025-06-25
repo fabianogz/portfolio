@@ -313,39 +313,68 @@ function copiarTelefone(element) {
   }
   // CONTATOS
 
-  function filtrarPortfolio(filtro) {
+const grid = document.querySelector('.portfolio-grid');
+const msnry = new Masonry(grid, {
+  itemSelector: '.portfolio-item',
+  columnWidth: '.grid-sizer',
+  gutter: 10,
+  percentPosition: true
+});
+
+function debounce(fn, delay) {
+  let timer = null;
+  return function(...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn.apply(this, args), delay);
+  };
+}
+
+window.addEventListener('resize', debounce(() => {
+  msnry.layout();
+}, 200));
+
+
+function filtrarPortfolio(filtro) {
   const items = document.querySelectorAll('.portfolio-item');
   const opcoes = document.querySelectorAll('.filtro-opcao');
 
   opcoes.forEach(op => op.classList.remove('ativo'));
+  document.querySelector(`.filtro-opcao[onclick*="${filtro}"]`)?.classList.add('ativo');
 
-  if (filtro === 'todos') {
-    items.forEach(item => item.style.display = 'block');
-  }
+  items.forEach(item => {
+    let deveMostrar = false;
 
-  if (filtro === 'data') {
-    items.forEach(item => {
-      const data = item.getAttribute('data-data');
-      if (parseInt(data) >= 2024) {
-        item.style.display = 'block';
-      } else {
+    if (filtro === 'todos') {
+      deveMostrar = true;
+    } else if (filtro === 'data') {
+      const data = parseInt(item.getAttribute('data-data'));
+      if (data >= 2024) deveMostrar = true;
+    } else if (filtro === 'devweb') {
+      if (item.classList.contains('devweb')) deveMostrar = true;
+    }
+
+    if (deveMostrar) {
+      item.style.display = 'block';
+      requestAnimationFrame(() => {
+        item.classList.remove('oculto');
+        item.classList.add('preencher');
+      });
+      setTimeout(() => item.classList.remove('preencher'), 400);
+    } else {
+      item.classList.add('oculto');
+      setTimeout(() => {
         item.style.display = 'none';
-      }
-    });
-  }
+      }, 300);
+    }
+  });
 
-  if (filtro === 'devweb') {
-    items.forEach(item => {
-      if (item.classList.contains('devweb')) {
-        item.style.display = 'block';
-      } else {
-        item.style.display = 'none';
-      }
-    });
-  }
-
-  document.querySelector(`.filtro-opcao[onclick*="${filtro}"]`).classList.add('ativo');
+  setTimeout(() => {
+    msnry.reloadItems();
+    msnry.layout();
+  }, 350);
 }
+
+
 // FILTRO
 
 // Sequência correta
