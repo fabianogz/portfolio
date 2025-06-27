@@ -21,7 +21,9 @@ html {
     scroll-behavior: smooth;
 }
 
-
+body, html {
+  overflow-x: hidden;
+}
 /* PAGINA */   
 
 header {
@@ -162,14 +164,19 @@ nav .nav-links a:hover {
 }
 
 .code-line::after {
-    content: '';
-    display: inline-block;
-    width: 10px;
-    height: 1.2em;
-    background-color: #00ff88;
-    margin-left: 5px;
-    vertical-align: middle;
-    animation: blink 1s steps(1, start) infinite;
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 1.2em;
+  background-color: #00ff88;
+  margin-left: 5px;
+  vertical-align: middle;
+  animation: blink 1s steps(1, start) infinite;
+  animation-play-state: running; /* default */
+}
+
+.code-line.blink-paused::after {
+  animation-play-state: paused !important;
 }
 
 @keyframes blink {
@@ -179,6 +186,7 @@ nav .nav-links a:hover {
 
 
 .hero-content {
+    top: -60px;
     max-width: 800px;
 }
 
@@ -237,8 +245,8 @@ h1 {
 .corner-text .amp {
   font-size: 0.5em;
   position: relative;
-  top: 15px;
-  right: 10px;
+  top: 0px;
+  right: 20px;
 }
 
 
@@ -265,46 +273,66 @@ h1 {
 }
 /**/
 
-
 .portfolio-grid {
   position: relative;
   max-width: 1300px;
+  transition: height 0.3s ease;
   margin: 0 auto;
 }
 
-/* Grid base para Masonry calcular as colunas */
+.portfolio-grid::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
 .grid-sizer {
   width: calc(33.3333% - 6.66px);
-  float: left;
   box-sizing: border-box;
 }
 
 .portfolio-item {
   width: calc(33.3333% - 6.66px);
-  float: left;
   margin-bottom: 20px;
   background: #2a2a2a;
   border-radius: 10px;
   overflow: hidden;
   box-sizing: border-box;
-  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  will-change: transform, top, left;
+  position: relative;
 }
 
 .portfolio-item img {
+  max-height: 250px; 
+  image-rendering: auto;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translateZ(0);
+  will-change: transform;
   width: 100%;
-  height: auto;
   object-fit: cover;
+  transition: transform 0.3s ease;
   border-radius: 10px 10px 0 0;
+  flex-shrink: 0;
 }
 
-/* Item de destaque ocupa 2 colunas */
+.portfolio-item:hover img {
+  transform: scale(1.05);
+}
+
 .portfolio-item.destaque {
-  width: 66.6666%;
-  height: calc(2 * 300px + 20px)
+  width: calc(66.6666% - 6.66px);
 }
 
-.portfolio-item.destaque-vertical {
-  height: calc(100% + 100% + 20px); 
+.portfolio-item.destaque img {
+  max-height: 525px;
+  height: 620px; 
+  object-fit: cover;
 }
 
 .portfolio-item.oculto {
@@ -341,13 +369,14 @@ h1 {
   .grid-sizer {
     width: 100% !important;
   }
-  .portfolio-item {
-    width: 100% !important;
-    float: none;
-    margin-bottom: 15px;
-  }
+  .portfolio-item,
   .portfolio-item.destaque {
-    width: 100% !important;
+    width: 100% !important; 
+  }
+  .portfolio-item img,
+  .portfolio-item.destaque img {
+    max-height: 250px !important; 
+    height: auto !important;
   }
 }
 
@@ -387,7 +416,7 @@ h1 {
   font-family: 'Nexa Heavy', sans-serif;
   font-size: 1em;
   margin-top: 80px;
-  margin-right: 755px;
+  margin-right: 780px;
   margin-bottom: 20px;
   color: rgb(165, 165, 165);
 }
@@ -1008,18 +1037,15 @@ h1 {
 }
 
 .telefone-span {
-  transition: opacity 0.4s ease;
-  opacity: 1;
-  -webkit-touch-callout: none; 
-  -webkit-user-select: text;   
+  color: inherit !important;
+  text-decoration: none !important;
+  -webkit-text-fill-color: currentColor !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: text;
+  -webkit-user-modify: read-write-plaintext-only;
   -webkit-tap-highlight-color: transparent;
-  color: inherit;            
-  text-decoration: none;  
-  -webkit-text-fill-color: currentColor; 
-  -webkit-user-modify: read-write-plaintext-only; 
-  -webkit-tap-highlight-color: transparent;
+  cursor: text;
 }
-
 
 
 /* contato */
@@ -1250,6 +1276,70 @@ footer p {
   border: 0;
 }
 
+/**/
+.setas-mobile {
+  position: absolute;
+  right: 15px;
+  bottom: 10px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  z-index: 999;
+  pointer-events: none;
+}
+
+.seta-wrapper {
+  position: relative;
+  width: 24px;
+  height: 40px;
+  overflow: hidden; 
+}
+
+.seta-wrapper::before,
+.seta-wrapper::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  background: currentColor;
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>') no-repeat center;
+  -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>') no-repeat center;
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  animation: setaLoop 2.4s linear infinite; 
+  opacity: 0;
+}
+
+.seta-wrapper::before {
+  animation-delay: 0s;
+}
+
+.seta-wrapper::after {
+  animation-delay: 1.2s; 
+}
+
+@keyframes setaLoop {
+  0% {
+    transform: translateY(-12px);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+}
+
+
+
+/**/
+
 @media (max-width: 768px) {
   html, body {
   margin: 0;
@@ -1416,17 +1506,17 @@ nav .contato-btn {
 }
   .corner-text {
     position: absolute;
-    top: 75%;
+    top: 82%;
     left: 10px;
     bottom: auto;
     font-size: 5em;
-    line-height: 1.2;
+    line-height: 0,2;
     text-align: left;
   }
 
   .corner-text .amp {
-    font-size: 0.5em;
-    vertical-align: middle;
+    top: 0px;
+    right: 10px;
   }
   .hero {
       height: 86vh;
@@ -1649,8 +1739,21 @@ nav .contato-btn {
   width: 24px;
 }
 
-/**/
+  .setas-mobile {
+    display: flex;
+  }
+
+  section {
+    position: relative;
+  }
   body {
     padding-top: 130px;
   }
 }
+
+@media (min-width: 769px) {
+  .setas-mobile {
+    display: none !important;
+  }
+}
+ 
