@@ -8,9 +8,9 @@ Este projeto foi desenvolvido com foco em apresentar minhas habilidades, projeto
 
 ## 🛠️ Tecnologias Utilizadas
 
-* **HTML** – 53.4%
-* **CSS** – 33.5%
-* **JavaScript** – 13.1%
+* **HTML** – 42.2%
+* **CSS** – 41.3%
+* **JavaScript** – 16.5%
 
 Todo o layout, interações e estrutura foram criados manualmente, com atenção a detalhes de responsividade e experiência do usuário.
 
