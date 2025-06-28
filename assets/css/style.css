@@ -762,6 +762,275 @@ h1 {
 }
 
 /*SOBRE */
+
+.planejamento-section {
+  padding: 50px 20px;
+  text-align: center;
+  background: #121212; 
+}
+
+.planejamento-section h2 {
+  font-family: 'Nexa Light', sans-serif;
+  font-size: 1.3em;
+  color: #32dee7; 
+  margin-bottom: -20px; 
+}
+
+.planejamento-section p {
+  font-family: 'Nexa Heavy', sans-serif;
+  font-size: 1.8em; 
+  color: white;
+  margin-bottom: 30px;  
+}
+
+
+/*/*/
+.cards-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+:root {
+  --fase-1-color: #32dee7; 
+  --fase-2-color: #e73232; 
+  --fase-3-color: #32e76d; 
+}
+
+.card {
+  width: 370px;
+  height: 530px;
+  border: 2px solid #32dee7;
+  border-radius: 32px;
+  perspective: 1000px;
+  background: #222;
+  overflow: hidden;
+  position: relative;
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* Frente do card */
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+  transition: all 0.6s ease;
+}
+
+.card-front {
+  background: #201f1f;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transform: translateY(0);
+  z-index: 2;
+}
+
+.card-front h3 {
+  font-size: 1.8em;
+  color: #32dee7;
+  margin: 0;
+}
+
+/* Verso do card */
+
+.card-back {
+  background-size: 600% 600%;
+  animation: gradientBG 8s ease infinite;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(20px);
+  z-index: 3;
+  overflow: hidden;
+  text-align: center;
+  position: relative; 
+}
+
+.card-back::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 60%, rgba(0,0,0,0.8) 100%);
+  z-index: 1;
+}
+
+.card-back h3 { 
+  font-family: 'Nexa Heavy', sans-serif;
+  color: #fff;
+  font-size: 1.8em;
+  margin-bottom: 10px;
+  z-index: 10; 
+  position: relative;
+}
+
+.card-back p {
+  font-family: 'Nexa Heavy', sans-serif;
+  font-size: 0.95em;
+  color: #fff;
+  z-index: 10;
+  position: relative;
+}
+
+@keyframes moveDots {
+  0% {
+    background-position:
+      0 0,
+      4px 4px;
+  }
+  100% {
+    background-position:
+      200px 200px,
+      204px 204px;
+  }
+}
+
+.card:hover .card-front {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.card:hover .card-back {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fase-1 .card-back {
+  background-color: var(--fase-1-color);
+}
+
+.fase-2 .card-back {
+  background-color: var(--fase-2-color);
+}
+
+.fase-3 .card-back {
+  background-color: var(--fase-3-color);
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.three-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/**/
+.fase-badge {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  background: #121212;
+  border: 1px solid #32dee7;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.fase-badge h3 {
+  margin: 0;
+  font-size: 1.2em;
+  color: #32dee7;
+  font-family: 'Nexa Heavy', sans-serif;
+  letter-spacing: 1px;
+}
+
+.fase-badge .shine {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shine-horizontal 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes shine-horizontal {
+  0% {
+    left: -100%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.4;
+  }
+  50% {
+    left: 100%;
+    opacity: 0;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .cards-container {
+    flex-direction: column;
+    align-items: center;   
+    gap: 17px;              
+  }
+
+  .card {
+    width: 95vw;     
+    max-width: 320px;
+    height: auto;    
+    min-height: 200px; 
+  }
+  .card-inner {
+    height: 100%; 
+  }
+
+  .card-front h3 {
+    font-size: 1.2em;
+  }
+
+  .card-back h3 { 
+    font-size: 1.4em;
+    margin-bottom: 2px;  
+    line-height: 1.1;  
+  }
+  .card-back {
+    min-height: 200px; 
+  }
+  .card-back p {
+    font-size: 0.85em;
+    margin-top: 0;
+    line-height: 1.2;  
+  }
+}
+
+
+/*/*/
 @font-face {
   font-family: 'Nexa Heavy';
   src: url('../fonts/Nexa-Heavy.ttf') format('truetype');
@@ -817,6 +1086,7 @@ h1 {
   width: 24px;
   height: 24px;
   flex-shrink: 0;
+  vertical-align: middle;
 }
 
 .contato-item span {
@@ -828,9 +1098,11 @@ h1 {
 }
 
 .contato-item.instagram svg {
-  width: 30px;
+  width: 32px;
   height: 32px;
+  margin-left: -6px; 
 }
+
 
 .contato-section h2 {
   font-family: 'Nexa Light', sans-serif;
@@ -1036,17 +1308,6 @@ h1 {
   animation: piscarAnim 2s ease-in-out 1;
 }
 
-.telefone-span {
-  color: inherit !important;
-  text-decoration: none !important;
-  -webkit-text-fill-color: currentColor !important;
-  -webkit-touch-callout: none;
-  -webkit-user-select: text;
-  -webkit-user-modify: read-write-plaintext-only;
-  -webkit-tap-highlight-color: transparent;
-  cursor: text;
-}
-
 
 /* contato */
 footer {
@@ -1144,17 +1405,17 @@ footer {
   fill: white; 
 }
 
-.social-btn.whatsapp:hover {
-    background-color: #25D366;
+.social-btn.linkedin:hover {
+    background-color: #0266C8;
     transform: translateY(-8px);
     z-index: 10;
 }
 
-.social-btn.whatsapp svg path {
-    fill: #25D366;
+.social-btn.linkedin svg path {
+    fill: #0266C8;
 }
 
-.social-btn.whatsapp:hover svg path {
+.social-btn.linkedin:hover svg path {
     fill: #ffffff;
 }
 
@@ -1238,12 +1499,16 @@ footer p {
   transform: translateY(-5px);
 }
 
+#sobre {
+  scroll-margin-top: 70px; 
+}
+
 #portfolio {
   scroll-margin-top: 50px; 
 }
 
-#sobre {
-  scroll-margin-top: 70px; 
+#planejamento {
+  scroll-margin-top: 65px; 
 }
 
 #contato {
@@ -1614,8 +1879,6 @@ nav .contato-btn {
       height: 88vh;
       top: -25px;
   }
-
-  
   .code-line {
     font-family: 'Fira Code', monospace;
     color: #00ff88; 
@@ -1623,21 +1886,6 @@ nav .contato-btn {
     margin-bottom: 10px;
     top: 20px;
 }
-    .sobre-card {
-    width: 100%;
-    padding: 20px 10px;
-    display: flex;
-    justify-content: center; 
-  }
-  
-    .sobre-card .tecnologias-grid {
-    font-family: 'Nexa Light', sans-serif;
-    display: grid;
-    max-width: 450px;        
-    grid-template-columns: repeat(2, 1fr); 
-    justify-content: center; 
-  }
-
     .sobre-card h3 {
     color: #ffffff;
     font-family: 'Nexa Heavy', sans-serif;
@@ -1645,6 +1893,21 @@ nav .contato-btn {
     text-align: center;
     margin-bottom: 10px;  
     margin-top: -5px;
+  }
+    .sobre-card {
+    width: 100%;
+    padding: 20px 15px;
+    display: flex;
+    justify-content: center; 
+  }
+  
+    .sobre-card .tecnologias-grid {
+    font-family: 'Nexa Light', sans-serif;
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    justify-content: center; 
+    gap: 28px;
   }
 
     .tecnologia-titulo svg {
@@ -1655,17 +1918,28 @@ nav .contato-btn {
     margin: 0; 
     flex-shrink: 0;
 }
+
   .tecnologia-item {
   border-radius: 12px;
-  padding: 4px 4px;
+  padding: 4px 30px;
   width: 100%;
-  max-width: 130px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
   margin: 0 auto;
   background-color: transparent;
+}
+
+  .tecnologia-menu {
+  border-radius: 12px;
+  padding: 4px 30px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  margin: 0 auto;
 }
 
   .tecnologia-titulo {
@@ -1684,6 +1958,7 @@ nav .contato-btn {
     font-size: 0.9em;
     margin-left: 20px;
     text-align: left;
+    white-space: nowrap;
   }
 
   .experiencia-header {

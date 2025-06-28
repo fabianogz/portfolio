@@ -100,7 +100,6 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
   const nomeInput = document.getElementById('nome');
   const emailInput = document.getElementById('email');
-  const telefoneInput = document.getElementById('telefone');
   const mensagemTextarea = document.getElementById('mensagem');
   const form = document.getElementById('contato-form');
 
@@ -130,23 +129,6 @@ function piscarCampo(element) {
     }
   }
 
-  function validarTelefone() {
-    const telefone = telefoneInput.value.trim();
-    const regexFormatado = /^\(\d{2}\)\s(\d\s)?\d{4}-\d{4}$/;
-    const regexLimpo = /^\d{10,11}$/;
-
-    if (telefone.length === 0) {
-      telefoneInput.classList.remove('invalid');
-      return;
-    }
-
-    if (regexFormatado.test(telefone) || regexLimpo.test(telefone)) {
-      telefoneInput.classList.remove('invalid');
-    } else {
-      telefoneInput.classList.add('invalid');
-    }
-  }
-
   function autoResizeTextarea(textarea) {
     textarea.style.height = 'auto';
     textarea.style.height = textarea.scrollHeight + 'px';
@@ -154,7 +136,6 @@ function piscarCampo(element) {
 
   nomeInput.addEventListener('input', validarNome);
   emailInput.addEventListener('input', validarEmail);
-  telefoneInput.addEventListener('input', validarTelefone);
   mensagemTextarea.addEventListener('input', function() {
     autoResizeTextarea(mensagemTextarea);
   });
@@ -162,39 +143,7 @@ function piscarCampo(element) {
   let oldValue = '';
   let oldCursor = 0;
 
-  telefoneInput.addEventListener('input', function(e) {
-    let value = telefoneInput.value;
-    let cursor = telefoneInput.selectionStart;
 
-    let cleaned = value.replace(/\D/g, '').slice(0, 11);
-    let formatted = '';
-
-    if (cleaned.length > 0) {
-      formatted += '(' + cleaned.slice(0, 2) + ') ';
-    }
-    if (cleaned.length > 2) {
-      if (cleaned.length > 6) {
-        formatted += cleaned.slice(2, 3) + ' ' + cleaned.slice(3, 7) + '-' + cleaned.slice(7);
-      } else {
-        formatted += cleaned.slice(2);
-      }
-    }
-
-    if (formatted !== value) {
-      telefoneInput.value = formatted;
-      let newCursor = cursor;
-
-      if (cursor > oldCursor && formatted.length > oldValue.length) {
-        newCursor = cursor + (formatted.length - oldValue.length);
-      }
-      newCursor = Math.min(newCursor, formatted.length);
-      telefoneInput.setSelectionRange(newCursor, newCursor);
-    }
-
-    oldValue = telefoneInput.value;
-    oldCursor = telefoneInput.selectionStart;
-    validarTelefone();
-  });
 
   function showNotification(message, isError = false) {
     let notification = document.querySelector('.notification');
@@ -235,11 +184,9 @@ function piscarCampo(element) {
 
     validarNome();
     validarEmail();
-    validarTelefone();
 
     if (nomeInput.classList.contains('invalid') ||
-        emailInput.classList.contains('invalid') ||
-        telefoneInput.classList.contains('invalid')) {
+        emailInput.classList.contains('invalid')) {
       return;
     }
 
@@ -258,35 +205,7 @@ function piscarCampo(element) {
       });
   });
 
-
 });
-
-let copiandoTelefone = false;
-
-function copiarTelefone(element) {
-  if (copiandoTelefone) return;
-
-  copiandoTelefone = true;
-
-  const telefone = "(61) 99453-7365";
-  const telefoneSpan = element.querySelector('span');
-  const textoOriginal = telefoneSpan.textContent;
-
-  telefoneSpan.classList.remove('telefone-fade-in');
-  telefoneSpan.textContent = "* COPIADO *";
-  telefoneSpan.classList.add('piscar');
-
-  setTimeout(() => {
-    telefoneSpan.classList.remove('piscar');
-    telefoneSpan.textContent = textoOriginal;
-    telefoneSpan.style.opacity = 0;
-
-    setTimeout(() => {
-      telefoneSpan.style.opacity = 1;
-      copiandoTelefone = false;
-    }, 50);  
-  }, 2000);
-}
 
 
   const scrollTopBtn = document.getElementById('scrollTopBtn');
@@ -458,6 +377,18 @@ function iniciarDoom() {
   hero.appendChild(iframe);
 }
 
+const imgs = document.querySelectorAll('.portfolio-item img');
+
+imgs.forEach(img => {
+  const baseSrc = img.getAttribute('src');
+  const src2x = baseSrc.replace('.webp', '@2x.webp');
+
+  if (window.devicePixelRatio > 1) {
+    img.setAttribute('src', src2x);
+  }
+});
+
+
 // HEADER
 function toggleMenu() {
   const nav = document.querySelector('nav');
@@ -466,3 +397,48 @@ function toggleMenu() {
   nav.classList.toggle('show');
   toggle.classList.toggle('active');
 }
+
+/*
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.querySelector(".three-bg");
+  if (!container) return;
+
+  const canvas = document.createElement("canvas");
+  container.appendChild(canvas);
+  const ctx = canvas.getContext("2d");
+
+  function resize() {
+    canvas.width = container.clientWidth;
+    canvas.height = container.clientHeight;
+  }
+  resize();
+  window.addEventListener("resize", resize);
+
+  const fontSize = 10;
+  const columns = Math.floor(canvas.width / fontSize);
+  const drops = Array(columns).fill(1);
+
+  function draw() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#00ff00"; 
+    ctx.font = `${fontSize}px monospace`;
+
+    for (let i = 0; i < drops.length; i++) {
+      const text = String.fromCharCode(0x30A0 + Math.random() * 96);
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+
+      drops[i]++;
+    }
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+})
+*/
+ 
