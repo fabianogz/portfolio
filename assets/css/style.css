@@ -15,6 +15,16 @@
   display: block;       
 }
 
+.portfolio-item a:visited {
+  color: inherit;          
+}
+
+.portfolio-item a:hover,
+.portfolio-item a:active,
+.portfolio-item a:focus {
+  color: inherit;         
+}
+
 .parallax-element {
     transform: translateY(var(--parallax-offset, 0));
     transition: transform 0.1s ease-out;
