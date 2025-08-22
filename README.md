@@ -1,4 +1,4 @@
-# 💻 Meu Portfólio Pessoal [ Ainda não finalizado ]
+# 💻 Meu Portfólio Pessoal
 
 Bem-vindo ao repositório do meu **Portfólio de Desenvolvimento Web**!
 
@@ -45,7 +45,6 @@ Caso queira falar comigo para oportunidades, parcerias ou dúvidas:
 
 * **Email:** [fabianogz.dev@gmail.com](mailto:fabianogz.dev@gmail.com)
 * **Linkedin:** [linkedin.com/in/fgdevs](linkedin.com/in/fgdevs)
-* **Instagram:** [@fabianogz](https://instagram.com/fabianogz)
 * **GitHub:** [fabianogz](https://github.com/fabianogz)
 
 ---
