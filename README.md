@@ -1,4 +1,4 @@
-# 💻 Meu Portfólio Pessoal
+# 💻 Meu Portfólio Profissional
 
 Bem-vindo ao repositório do meu **Portfólio**!
 
@@ -41,5 +41,6 @@ O código-fonte deste portfólio está disponível **apenas para fins de consult
 Sinta-se à vontade para **navegar e explorar o código**, mas caso queira utilizar algum trecho, **entre em contato comigo previamente para solicitar autorização**.
 
 ---
+
 
 **Obrigado por visitar!** 🚀
