@@ -1,0 +1,40 @@
+{
+  "name": "FG DEVS - Portfólio | Fabiano Gomes",
+  "short_name": "FG DEVS",
+  "description": "Portfólio de Fabiano Gomes - Desenvolvedor Full-Stack e Designer",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#00adb5",
+  "background_color": "#0a0a0a",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["portfolio", "developer", "design", "technology"],
+  "screenshots": [
+    {
+      "src": "../bolsointeligente.webp",
+      "sizes": "1280x720",
+      "type": "image/webp",
+      "label": "Portfolio showcase"
+    }
+  ]
+}

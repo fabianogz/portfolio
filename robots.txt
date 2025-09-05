@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://fabianogz.github.io/portfolio/sitemap.xml
+
+# Performance optimizations
+User-agent: *
+Crawl-delay: 1
+
+# Block unnecessary crawling
+Disallow: /assets/js/
+Disallow: /assets/css/
+Disallow: *.json
+Disallow: *.map
+
+# Allow important assets
+Allow: /assets/img/
+Allow: /assets/fonts/
